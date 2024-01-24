@@ -6,12 +6,21 @@
 #include "STUUtils.h"
 #include "Components/STUHealthComponent.h"
 #include "Perception/AISense_Sight.h"
+#include "Perception/AISense_Damage.h"
+
+DEFINE_LOG_CATEGORY_STATIC(LogAIPerceptionComponent, All, All);
 
 AActor* USTUAIPerceptionComponent::GetClosestEnemy() const
 {
     TArray<AActor*> PercieveActors;
-    GetCurrentlyPerceivedActors(UAISense::StaticClass(), PercieveActors);
-    if (PercieveActors.Num() == 0) return nullptr;
+    // might be problem
+    GetCurrentlyPerceivedActors(UAISense_Sight::StaticClass(), PercieveActors);
+    if (PercieveActors.Num() == 0)
+    {
+        GetCurrentlyPerceivedActors(UAISense_Damage::StaticClass(), PercieveActors);
+        if (PercieveActors.Num() == 0) return nullptr;
+    }
+    //UE_LOG(LogAIPerceptionComponent, Error, TEXT("PercieveActors Num : %s"), *PercieveActors.Num());
 
     const auto Controller = Cast<AAIController>(GetOwner());
     if (!Controller) return nullptr;
@@ -24,7 +33,11 @@ AActor* USTUAIPerceptionComponent::GetClosestEnemy() const
     for (const auto PercieveActor : PercieveActors)
     {
         const auto HealthComponent = STUUtils::GetSTUPlayerComponent<USTUHealthComponent>(PercieveActor);
-        if (HealthComponent && !HealthComponent->IsDead()) // TODO: check if enemies or not
+
+        const auto PercievePawn = Cast<APawn>(PercieveActor);
+        const auto AreEnemies = PercievePawn && STUUtils::AreEnemies(Controller, PercievePawn->GetController());
+
+        if (HealthComponent && !HealthComponent->IsDead() && AreEnemies) 
         {
             const auto CurrentDistance = (PercieveActor->GetActorLocation() - Pawn->GetActorLocation()).Size();
             if (CurrentDistance < BestDistance)

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Pickiups/STUBasePickup.h"
+#include "Pickups/STUBasePickup.h"
 #include "STUAmmoPickup.generated.h"
 
 class ASTUBaseWeapon;
