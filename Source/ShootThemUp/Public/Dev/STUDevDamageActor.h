@@ -19,7 +19,7 @@ public:
 	USceneComponent* SceneComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FColor SphereColor = FColor::Blue;
+    FColor SphereColor = FColor::Yellow;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float Radius = 300.0f;

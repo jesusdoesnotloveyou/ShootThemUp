@@ -1,10 +1,13 @@
+.idea
 .vs
 *.sln
-DerivedDataCache/
-Intermediate/
-Saved/
 Binaries/
 Build/
 Config/
+DerivedDataCache/
+Intermediate/
+Saved/
+Script/
+Plugins/Developer/RiderLink/
 Content/__ExternalActors__
 Content/__ExternalObjects__

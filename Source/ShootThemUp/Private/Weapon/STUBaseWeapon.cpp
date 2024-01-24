@@ -31,26 +31,39 @@ void ASTUBaseWeapon::BeginPlay()
     CurrentAmmo = DefaultAmmo;
 }
 
+void ASTUBaseWeapon::Zoom(bool Enabled) {}
+
 void ASTUBaseWeapon::StartFire() {}
 
 void ASTUBaseWeapon::StopFire() {}
 
 void ASTUBaseWeapon::MakeShot() {}
 
-APlayerController* ASTUBaseWeapon::GetPlayerController() const
-{
-    const auto Player = Cast<ACharacter>(GetOwner());
-    if (!Player) return nullptr;
-
-    return Player->GetController<APlayerController>();   
-}
+//APlayerController* ASTUBaseWeapon::GetPlayerController() const
+//{
+//    const auto Player = Cast<ACharacter>(GetOwner());
+//    if (!Player) return nullptr;
+//
+//    return Player->GetController<APlayerController>();   
+//}
 
 bool ASTUBaseWeapon::GetPlayerViewPoint(FVector &ViewLocation, FRotator &ViewRotation) const
 {
-    const auto Controller = GetPlayerController();
-    if (!Controller) return false;
+    const auto STUCharacter = Cast<ACharacter>(GetOwner());
+    if (!STUCharacter) return false;
 
-    Controller->GetPlayerViewPoint(ViewLocation, ViewRotation);
+    if (STUCharacter->IsPlayerControlled())
+    {
+        const auto Controller = STUCharacter->GetController<APlayerController>();
+        if (!Controller) return false;
+        
+        Controller->GetPlayerViewPoint(ViewLocation, ViewRotation);
+    }
+    else
+    {
+        ViewLocation = GetMuzzleWorldLocation();
+        ViewRotation = WeaponMesh->GetSocketRotation(MuzzleSocketName);
+    }
     return true;
 }
 
@@ -120,7 +133,7 @@ void ASTUBaseWeapon::ChangeClip()
         CurrentAmmo.Clips--;
     }
     CurrentAmmo.Bullets = DefaultAmmo.Bullets;
-    UE_LOG(LogBaseWeapon, Display, TEXT("--- Clip changing ---"));
+    // UE_LOG(LogBaseWeapon, Display, TEXT("--- Clip changing ---"));
 }
 
 void ASTUBaseWeapon::LogAmmo()
