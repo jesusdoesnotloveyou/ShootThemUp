@@ -11,3 +11,4 @@ Script/
 Plugins/Developer/RiderLink/
 Content/__ExternalActors__
 Content/__ExternalObjects__
+*.vsconfig

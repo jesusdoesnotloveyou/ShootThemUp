@@ -74,6 +74,7 @@ FVector ASTUBaseWeapon::GetMuzzleWorldLocation() const
 
 bool ASTUBaseWeapon::GetTraceData(FVector& TraceStart, FVector& TraceEnd) const
 {
+    // TODO: start point gotta be muzzle of the weapon character holds
     FVector ViewLocation;
     FRotator ViewRotation;
     if (!GetPlayerViewPoint(ViewLocation, ViewRotation)) return false;
