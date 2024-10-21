@@ -6,9 +6,6 @@
 #include "BehaviorTree/BTDecorator.h"
 #include "STUHealthPercentDecorator.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SHOOTTHEMUP_API USTUHealthPercentDecorator : public UBTDecorator
 {

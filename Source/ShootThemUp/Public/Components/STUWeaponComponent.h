@@ -80,5 +80,4 @@ private:
 
     void OnClipEmpty(ASTUBaseWeapon* AmmoEmptyWeapon);
     void ChangeClip();
-
 };

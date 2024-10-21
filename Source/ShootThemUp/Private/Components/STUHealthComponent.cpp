@@ -1,7 +1,7 @@
 // Shoot Them Up Game, All Rights Reserved.
 
 #include "Components/STUHealthComponent.h"
-//#include "GameFramework/Actor.h"
+#include "GameFramework/Actor.h"
 //#include "GameFramework/Pawn.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
@@ -29,12 +29,12 @@ void USTUHealthComponent::BeginPlay()
 
     SetHealth(MaxHealth);
 
-    AActor *ComponentOwner = GetOwner();
+    AActor* ComponentOwner = GetOwner();
     if (ComponentOwner)
     {
         ComponentOwner->OnTakeAnyDamage.AddDynamic(this, &USTUHealthComponent::OnTakeAnyDamage);
         ComponentOwner->OnTakePointDamage.AddDynamic(this, &USTUHealthComponent::OnTakePointDamage);
-        ComponentOwner->OnTakeRadialDamage.AddDynamic(this, &USTUHealthComponent::OnTakeRadialDamage);
+        //ComponentOwner->OnTakeRadialDamage.AddDynamic(this, &USTUHealthComponent::OnTakeRadialDamage);
     }
 }
 
