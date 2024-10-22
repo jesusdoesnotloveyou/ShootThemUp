@@ -2,11 +2,11 @@
 
 #include "Components/STUHealthComponent.h"
 #include "GameFramework/Actor.h"
-//#include "GameFramework/Pawn.h"
+#include "GameFramework/Pawn.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
-//#include "Dev/STUIceDamageType.h"
-//#include "Dev/STUFireDamageType.h"
+#include "Dev/STUIceDamageType.h"
+#include "Dev/STUFireDamageType.h"
 #include "Camera/CameraShakeBase.h"
 #include "Engine/World.h"
 #include "Perception/AISense_Damage.h"
@@ -34,6 +34,7 @@ void USTUHealthComponent::BeginPlay()
     {
         ComponentOwner->OnTakeAnyDamage.AddDynamic(this, &USTUHealthComponent::OnTakeAnyDamage);
         ComponentOwner->OnTakePointDamage.AddDynamic(this, &USTUHealthComponent::OnTakePointDamage);
+        // Some error causes crash
         //ComponentOwner->OnTakeRadialDamage.AddDynamic(this, &USTUHealthComponent::OnTakeRadialDamage);
     }
 }

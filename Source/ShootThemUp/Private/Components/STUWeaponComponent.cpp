@@ -60,11 +60,10 @@ void USTUWeaponComponent::SpawnWeapons()
     }
 }
 
-void USTUWeaponComponent::AttachWeaponToSocket(ASTUBaseWeapon *Weapon, USceneComponent *SceneComponent,
-                                               const FName &SocketName)
+void USTUWeaponComponent::AttachWeaponToSocket(ASTUBaseWeapon *Weapon, USceneComponent *SceneComponent, 
+    const FName &SocketName)
 {
-    if (!Weapon || !SceneComponent)
-        return;
+    if (!Weapon || !SceneComponent) return;
     FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, false);
     Weapon->AttachToComponent(SceneComponent, AttachmentRules, SocketName);
 }
