@@ -2,11 +2,11 @@
 
 #include "Components/STUHealthComponent.h"
 #include "GameFramework/Actor.h"
-//#include "GameFramework/Pawn.h"
+#include "GameFramework/Pawn.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
-//#include "Dev/STUIceDamageType.h"
-//#include "Dev/STUFireDamageType.h"
+#include "Dev/STUIceDamageType.h"
+#include "Dev/STUFireDamageType.h"
 #include "Camera/CameraShakeBase.h"
 #include "Engine/World.h"
 #include "Perception/AISense_Damage.h"
@@ -34,6 +34,7 @@ void USTUHealthComponent::BeginPlay()
     {
         ComponentOwner->OnTakeAnyDamage.AddDynamic(this, &USTUHealthComponent::OnTakeAnyDamage);
         ComponentOwner->OnTakePointDamage.AddDynamic(this, &USTUHealthComponent::OnTakePointDamage);
+        // Some error causes crash
         //ComponentOwner->OnTakeRadialDamage.AddDynamic(this, &USTUHealthComponent::OnTakeRadialDamage);
     }
 }
@@ -61,6 +62,7 @@ void USTUHealthComponent::OnTakeAnyDamage(AActor *DamagedActor, float Damage, co
                                           AController *InstigatedBy, AActor *DamageCauser)
 {
     UE_LOG(LogHealthComponent, Display, TEXT("On any damage: %f"), Damage);
+    ApplyDamage(Damage, InstigatedBy);
 }
 
 void USTUHealthComponent::ApplyDamage(float Damage, AController *InstigatedBy)
@@ -180,6 +182,7 @@ float USTUHealthComponent::GetPointDamageModifier(AActor *DamagedActor, const FN
 void USTUHealthComponent::ReportDamageEvent(float Damage, AController *InstigatedBy)
 {
     if (!InstigatedBy || !InstigatedBy->GetPawn() || !GetOwner())
+        return;
     UAISense_Damage::ReportDamageEvent(GetWorld(),                                  //
                                        GetOwner(),                                  //
                                        InstigatedBy->GetPawn(),                     //

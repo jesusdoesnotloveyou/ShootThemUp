@@ -25,8 +25,8 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
     USTUWeaponComponent* WeaponComponent;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Animation")
-	UAnimMontage* DeathAnimMontage;
+	//UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	//UAnimMontage* DeathAnimMontage;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
     float LifeSpanOnDeath = 5.0f;

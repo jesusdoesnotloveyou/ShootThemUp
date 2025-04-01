@@ -15,7 +15,6 @@ ASTUBasePickup::ASTUBasePickup()
     CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     CollisionComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
     SetRootComponent(CollisionComponent);
-    
 }
 
 // Called when the game starts or when spawned
@@ -34,7 +33,6 @@ void ASTUBasePickup::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
     
     AddActorLocalRotation(FRotator(0.0f, RotationYaw, 0.0f));
-
 }
 
 void ASTUBasePickup::NotifyActorBeginOverlap(AActor *OtherActor)

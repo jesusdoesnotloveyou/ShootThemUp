@@ -6,6 +6,8 @@
 #include "DrawDebugHelpers.h"
 #include "Weapon/Components/STUWeaponFXComponent.h"
 #include "NiagaraComponent.h"
+// Since UE5.1
+#include "Engine/DamageEvents.h"
 
 ASTURifleWeapon::ASTURifleWeapon()
 {

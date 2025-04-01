@@ -83,12 +83,12 @@ void ASTUGameModeBase::GameTimerUpdate()
         if (CurrentRound + 1 <= GameData.RoundsNum) 
         {
             ++CurrentRound;
-            ResetPlayers(); 
+            ResetPlayers();
             StartRound();
         }
         else
         {
-            GameOver();            
+            GameOver();
         }
     }
 }

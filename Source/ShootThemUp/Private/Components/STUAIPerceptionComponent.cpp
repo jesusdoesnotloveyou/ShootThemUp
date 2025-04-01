@@ -1,6 +1,5 @@
 // Shoot Them Up Game, All Rights Reserved.
 
-
 #include "Components/STUAIPerceptionComponent.h"
 #include "AIController.h"
 #include "STUUtils.h"
@@ -13,7 +12,6 @@ DEFINE_LOG_CATEGORY_STATIC(LogAIPerceptionComponent, All, All);
 AActor* USTUAIPerceptionComponent::GetClosestEnemy() const
 {
     TArray<AActor*> PercieveActors;
-    // might be problem
     GetCurrentlyPerceivedActors(UAISense_Sight::StaticClass(), PercieveActors);
     if (PercieveActors.Num() == 0)
     {
@@ -37,7 +35,7 @@ AActor* USTUAIPerceptionComponent::GetClosestEnemy() const
         const auto PercievePawn = Cast<APawn>(PercieveActor);
         const auto AreEnemies = PercievePawn && STUUtils::AreEnemies(Controller, PercievePawn->GetController());
 
-        if (HealthComponent && !HealthComponent->IsDead() && AreEnemies) 
+        if (HealthComponent && !HealthComponent->IsDead() && AreEnemies)
         {
             const auto CurrentDistance = (PercieveActor->GetActorLocation() - Pawn->GetActorLocation()).Size();
             if (CurrentDistance < BestDistance)
