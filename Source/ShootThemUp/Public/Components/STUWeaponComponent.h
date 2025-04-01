@@ -60,7 +60,6 @@ protected:
     bool CanEquip() const;
 
 private:
-
 	UPROPERTY()
 	UAnimMontage* CurrentReloadAnimMontage = nullptr;
 

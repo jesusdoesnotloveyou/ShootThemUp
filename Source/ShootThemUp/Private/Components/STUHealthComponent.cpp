@@ -62,6 +62,7 @@ void USTUHealthComponent::OnTakeAnyDamage(AActor *DamagedActor, float Damage, co
                                           AController *InstigatedBy, AActor *DamageCauser)
 {
     UE_LOG(LogHealthComponent, Display, TEXT("On any damage: %f"), Damage);
+    ApplyDamage(Damage, InstigatedBy);
 }
 
 void USTUHealthComponent::ApplyDamage(float Damage, AController *InstigatedBy)
@@ -181,6 +182,7 @@ float USTUHealthComponent::GetPointDamageModifier(AActor *DamagedActor, const FN
 void USTUHealthComponent::ReportDamageEvent(float Damage, AController *InstigatedBy)
 {
     if (!InstigatedBy || !InstigatedBy->GetPawn() || !GetOwner())
+        return;
     UAISense_Damage::ReportDamageEvent(GetWorld(),                                  //
                                        GetOwner(),                                  //
                                        InstigatedBy->GetPawn(),                     //

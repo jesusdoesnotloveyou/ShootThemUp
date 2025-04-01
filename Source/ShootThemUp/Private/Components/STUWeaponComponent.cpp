@@ -133,15 +133,12 @@ void USTUWeaponComponent::PlayAnimMontage(UAnimMontage *Animation)
 void USTUWeaponComponent::InitAnimations()
 {
     auto EquipFinishedNotify = AnimUtils::FindNotifyByClass<USTUEquipFinishedAnimNotify>(EquipAnimMontage);
-    if (EquipFinishedNotify)
-    {
-        EquipFinishedNotify->OnNotified.AddUObject(this, &USTUWeaponComponent::OnEquipFinished);
-    }
-    else
+    if (!EquipFinishedNotify)
     {
         UE_LOG(LogWeaponComponent, Error, TEXT("Equip anim notify is forgotten to set"));
         checkNoEntry();
     }
+    EquipFinishedNotify->OnNotified.AddUObject(this, &USTUWeaponComponent::OnEquipFinished);
 
     for (auto OneWeaponData : WeaponData)
     {
@@ -152,15 +149,13 @@ void USTUWeaponComponent::InitAnimations()
             checkNoEntry();
         }
         ReloadFinishedNotify->OnNotified.AddUObject(this, &USTUWeaponComponent::OnReloadFinished);
-       
     }
 }
 
 void USTUWeaponComponent::OnEquipFinished(USkeletalMeshComponent *MeshComponent)
 {
     ACharacter* Character = Cast<ACharacter>(GetOwner());
-    if (!Character || (Character->GetMesh() != MeshComponent))
-        return;
+    if (!Character || (Character->GetMesh() != MeshComponent)) return;
 
     EquipAnimInProgress = false;
     UE_LOG(LogWeaponComponent, Display, TEXT("Equip finished!"));

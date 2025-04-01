@@ -68,7 +68,7 @@ float ASTUBaseCharacter::GetMovementDirection() const
     return CrossProduct.IsZero() ? Degrees : Degrees * FMath::Sign(CrossProduct.Z);
 }
 
-void ASTUBaseCharacter::OnDeath() 
+void ASTUBaseCharacter::OnDeath()
 {
     UE_LOG(LogBaseCharacter, Display, TEXT("Player %s is dead"), *GetName());
 

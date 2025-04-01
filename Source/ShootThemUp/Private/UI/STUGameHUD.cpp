@@ -30,7 +30,7 @@ void ASTUGameHUD::BeginPlay()
     GameWidgets.Add(ESTUMatchState::Pause, CreateWidget<USTUBaseWidget>(GetWorld(), PauseWidgetClass));
     GameWidgets.Add(ESTUMatchState::GameOver, CreateWidget<USTUBaseWidget>(GetWorld(), GameOverWidgetClass));
 
-    for (auto GameWidgetPair : GameWidgets) 
+    for (auto GameWidgetPair : GameWidgets)
     {
         const auto GameWidget = GameWidgetPair.Value;
         if (!GameWidget) continue;
